@@ -1,47 +1,31 @@
 <?php
 
-/**
- * Class GoldbachsConjecture
- */
-class GoldbachsConjecture
+class GoldbachNumber
 {
-    /**
-     * @param $number
-     * @return array
-     */
     public function returnPairs($number)
     {
-        $pairs = [];
+        if (!$this->validate($number)) {
+            throw new InvalidArgumentException("The argument must be a natural positive number greater than 4");
+        }
 
-        for ($i = 2; $i < $number/2; $i++) {
+        $pairs = [];
+        for ($i = 2; $i < $number / 2; $i++) {
             if ($this->isPrime($i) && $this->isPrime($number - $i)) {
-                $pairs[] = [
-                    $i,
-                    $number - $i
-                ];
+                $pairs[] = [$i, $number - $i];
             }
         }
 
         return $pairs;
     }
 
-    /**
-     * @param $number
-     * @return bool
-     */
     public function isPair($number)
     {
         return ($number % 2 === 0) ? true : false;
     }
 
-    /**
-     * @param $number
-     * @return bool
-     */
     public function isPrime($number)
     {
-
-        if (($this->isPair($number) && $number !== 2)
+        if ($this->isPair($number)
             || $number === 1
         ) {
             return false;
@@ -56,16 +40,14 @@ class GoldbachsConjecture
         return true;
     }
 
-    /**
-     * @param $number
-     */
-    public function validate($number)
+    private function validate($number)
     {
-        if ($number < 1
-            || !is_integer($number)
-            || !$this->isPair($number)
+        if (is_integer($number)
+            && $this->isPair($number)
+            &&
+            $number > 4
         ) {
-            throw new InvalidArgumentException("The argument must be a positive pair natural goldbachsNumber");
+            return true;
         }
     }
 }
