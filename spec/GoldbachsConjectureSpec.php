@@ -5,11 +5,11 @@ namespace spec;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class GoldbachNumberSpec extends ObjectBehavior
+class GoldbachsConjectureSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('GoldbachNumber');
+        $this->shouldHaveType('GoldbachsConjecture');
     }
 
     function it_is_pair()
@@ -21,8 +21,11 @@ class GoldbachNumberSpec extends ObjectBehavior
 
     function it_is_prime()
     {
+        $this->isPrime(2)->shouldReturn(true);
         $this->isPrime(3)->shouldReturn(true);
+        $this->isPrime(9)->shouldReturn(false);
         $this->isPrime(37)->shouldReturn(true);
+        $this->isPrime(10007)->shouldReturn(true);
         $this->isPrime(300)->shouldReturn(false);
     }
 

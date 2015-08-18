@@ -1,6 +1,6 @@
 <?php
 
-class GoldbachNumber
+class GoldbachsConjecture
 {
     public function returnPairs($number)
     {
@@ -25,13 +25,19 @@ class GoldbachNumber
 
     public function isPrime($number)
     {
-        if ($this->isPair($number)
-            || $number === 1
-        ) {
+        if($number == 1) {
             return false;
         }
 
-        for ($i = 2; $i < $number; $i++) {
+        if($number == 2) {
+            return true;
+        }
+
+        if($this->isPair($number)) {
+            return false;
+        }
+
+        for ($i = 3; $i <= sqrt($number); $i=$i+2) {
             if ($number % $i === 0) {
                 return false;
             }
